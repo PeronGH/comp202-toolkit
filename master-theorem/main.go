@@ -68,9 +68,9 @@ func main() {
 		result = fmt.Sprintf("Θ(%s)", formatPolyLog(k, i))
 	case p > k:
 		if floatEquals(math.Round(p), p) {
-			result = fmt.Sprintf("Θ(n^%.0f)", p)
+			result = fmt.Sprintf("Θ(n^%s)", formatFloat(p))
 		} else {
-			result = fmt.Sprintf("Θ(n^(log_%v %v))", b, a)
+			result = fmt.Sprintf("Θ(n^(log_%s %s))", formatFloat(b), formatFloat(a))
 		}
 	default:
 		result = "Arithmetic error"
@@ -80,14 +80,14 @@ func main() {
 
 func formatCoefficient(a float64) string {
 	if a != 1 {
-		return strconv.FormatFloat(a, 'f', -1, 64) + " "
+		return formatFloat(a) + " "
 	}
 	return ""
 }
 
 func formatDivision(b float64) string {
 	if b != 1 {
-		return " / " + strconv.FormatFloat(b, 'f', -1, 64)
+		return " / " + formatFloat(b)
 	}
 	return ""
 }
@@ -104,7 +104,7 @@ func formatPolyLog(k, i float64) string {
 	case k == 1:
 		result = "n"
 	default:
-		result = fmt.Sprintf("n^%.0f", k)
+		result = "n^" + formatFloat(k)
 	}
 
 	if i != 0 {
@@ -113,12 +113,16 @@ func formatPolyLog(k, i float64) string {
 		}
 		result += "log"
 		if i != 1 {
-			result += fmt.Sprintf("^%.0f", i)
+			result += "^" + formatFloat(i)
 		}
 		result += " n"
 	}
 
 	return result
+}
+
+func formatFloat(value float64) string {
+	return strconv.FormatFloat(value, 'f', -1, 64)
 }
 
 func floatEquals(x, y float64) bool {
