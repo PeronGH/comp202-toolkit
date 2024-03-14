@@ -10,3 +10,4 @@ Utilities for solving common problems in COMP202.
    - **Apply master theorem**: `go run ./master-theorem`
    - **Fractional knapsack**: `go run ./fractional-knapsack`
    - **0/1 knapsack**: `go run ./01-knapsack`
+   - **Array Heap**: `go run ./array-heap`
